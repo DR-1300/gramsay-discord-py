@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from dotenv import load_dotenv
 import os
-
+from utils.db import Database
 load_dotenv()
 
 intents = discord.Intents.all()
@@ -14,6 +14,7 @@ bot = commands.Bot(command_prefix="!", intents = intents)
 @bot.event
 async def on_ready():
     print(f"Logged in as {bot.user}")
+    bot.db = await Database.create()
     for cog in ["cogs.moderation", "cogs.misc","cogs.help"]:
         await bot.load_extension(cog)
         print(f"Loaded {cog}")
