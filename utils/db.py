@@ -10,15 +10,14 @@ class Database:
         pool = await aiomysql.create_pool(
             host=os.getenv("DB_HOST", "localhost"),
             port=int(os.getenv("DB_PORT", 3306)),
-            user=os.getenv("DB_USER", "root"),
-            password=os.getenv("DB_PASSWORD", ""),
-            db=os.getenv("DB_NAME", "botacc"),
+            user=os.getenv("DB_USER"),
+            password=os.getenv("DB_PASSWORD"),
+            db=os.getenv("DB_NAME"),
             autocommit=True,
             minsize=1,
             maxsize=10,
         )
         db = cls(pool)
-        await db._init_tables()
         return db
     
     async def execute(self, query:str, *args):

@@ -15,7 +15,7 @@ bot = commands.Bot(command_prefix="!", intents = intents)
 async def on_ready():
     print(f"Logged in as {bot.user}")
     bot.db = await Database.create()
-    for cog in ["cogs.moderation", "cogs.misc","cogs.help"]:
+    for cog in ["cogs.moderation", "cogs.misc","cogs.help","cogs.giveaways"]:
         await bot.load_extension(cog)
         print(f"Loaded {cog}")
 async def on_command_error(ctx, error):
